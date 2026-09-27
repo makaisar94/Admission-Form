@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>শিক্ষার্থী ভর্তি ও স্বাস্থ্য তথ্য ফরম</title>
+
+<!-- Premium Bengali typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Modern date picker -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/bn.js"></script>
+
+<style>
+:root{
+  --primary:#0f766e;
+  --primary-2:#0b5f59;
+  --accent:#f59e0b;
+  --accent-soft:#fff7e6;
+  --ink:#172033;
+  --muted:#64748b;
+  --line:#cbd5e1;
+  --bg:#eef4f7;
+  --surface:#ffffff;
+  --danger:#dc2626;
+  --success:#16a34a;
+  --shadow:0 18px 50px rgba(15, 23, 42, .10);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(15,118,110,.07), transparent 30%),
+    radial-gradient(circle at 100% 10%, rgba(245,158,11,.08), transparent 30%),
+    var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans Bengali","Hind Siliguri",sans-serif;
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{max-width:1180px;margin:0 auto;padding:22px}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(18px);
+  background:rgba(238,244,247,.86);
+  border-bottom:1px solid rgba(148,163,184,.25);
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;padding:14px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:46px;height:46px;border-radius:15px;
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px;
+  background:linear-gradient(135deg,var(--primary),#14b8a6);
+  box-shadow:0 10px 25px rgba(15,118,110,.28);
+}
+.brand h1{margin:0;font-size:17px;line-height:1.25}
+.brand p{margin:2px 0 0;font-size:11px;color:var(--muted)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.btn{
+  border:1px solid var(--line);background:#fff;color:var(--ink);
+  padding:10px 14px;border-radius:12px;font-weight:700;
+  transition:.2s;box-shadow:0 3px 12px rgba(15,23,42,.04)
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,23,42,.08)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn.warning{background:#fff7ed;border-color:#fed7aa;color:#9a3412}
+.btn.danger{background:#fff1f2;border-color:#fecdd3;color:#be123c}
+.hero{
+  background:linear-gradient(145deg,#0f766e 0%,#0e8f83 55%,#1ab19f 100%);
+  color:#fff;border-radius:24px;padding:28px 30px;margin:20px 0;
+  position:relative;overflow:hidden;box-shadow:var(--shadow)
+}
+.hero:before,.hero:after{
+  content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)
+}
+.hero:before{width:260px;height:260px;right:-90px;top:-110px}
+.hero:after{width:170px;height:170px;left:-55px;bottom:-80px}
+.hero-inner{position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero h2{margin:0 0 5px;font-size:25px}
+.hero p{margin:0;opacity:.9;font-size:13px}
+.hero-badge{
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);
+  padding:10px 14px;border-radius:14px;font-weight:700;font-size:12px;
+  white-space:nowrap
+}
+.progress-wrap{margin:0 0 18px}
+.progress-card{
+  display:flex;gap:8px;overflow:auto;padding-bottom:3px
+}
+.progress-step{
+  flex:1;min-width:145px;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:10px;
+  color:var(--muted);font-size:12px;font-weight:700
+}
+.progress-step.active{border-color:rgba(15,118,110,.45);color:var(--primary);background:#f0fdfa}
+.progress-step .num{
+  width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  background:#eef2f7;font-size:12px
+}
+.progress-step.active .num{background:var(--primary);color:#fff}
+.form-card{
+  background:var(--surface);border:1px solid rgba(148,163,184,.34);
+  border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px
+}
+.section-head{
+  display:flex;align-items:center;gap:12px;justify-content:space-between;
+  padding:15px 18px;background:linear-gradient(90deg,#fff7e7,#fff);
+  border-bottom:1px solid #f1dfbd
+}
+.section-title{display:flex;align-items:center;gap:11px}
+.section-icon{
+  width:35px;height:35px;border-radius:11px;display:grid;place-items:center;
+  color:#8a5700;background:#fff1cf;font-weight:800
+}
+.section-head h3{margin:0;font-size:16px}
+.section-head span{font-size:11px;color:var(--muted)}
+.section-body{padding:18px}
+.grid{display:grid;gap:12px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid-6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.field{min-width:0}
+.field label{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;margin:0 0 6px;color:#334155
+}
+.req{color:var(--danger)}
+.field input,.field select,.field textarea{
+  width:100%;border:1px solid #cbd5e1;background:#fbfdff;
+  min-height:42px;border-radius:12px;padding:9px 11px;outline:none;
+  transition:.2s;color:var(--ink)
+}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:#2ab3a4;box-shadow:0 0 0 4px rgba(42,179,164,.12);background:#fff
+}
+.field .hint{font-size:10px;color:#94a3b8;margin-top:4px}
+.readonly{background:#f3f6f9!important;color:#475569}
+.full{grid-column:1/-1}
+.divider{height:1px;background:#e5e7eb;margin:16px 0}
+.mini-title{
+  font-size:12px;font-weight:800;color:#0f766e;margin:3px 0 10px;
+  display:flex;align-items:center;gap:8px
+}
+.mini-title:before{content:"";width:5px;height:16px;border-radius:999px;background:#14b8a6}
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
+.table{
+  width:100%;border-collapse:collapse;min-width:720px;background:#fff
+}
+.table th,.table td{border:1px solid #d7dee8;padding:9px 10px;text-align:right;font-size:12px}
+.table th{background:#f6f8fb;font-weight:800;color:#334155}
+.table td input,.table td select{min-height:38px}
+.signature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:18px}
+.signature{
+  padding:14px;border-top:1px dashed #94a3b8;text-align:center;color:#475569;font-size:11px
+}
+.footer-actions{
+  position:sticky;bottom:0;z-index:40;
+  background:rgba(255,255,255,.91);backdrop-filter:blur(12px);
+  border-top:1px solid rgba(148,163,184,.25);padding:12px 0
+}
+.footer-actions-inner{
+  max-width:1180px;margin:auto;padding:0 22px;display:flex;justify-content:space-between;
+  gap:10px;align-items:center
+}
+.status{font-size:11px;color:var(--muted)}
+.action-group{display:flex;gap:8px;flex-wrap:wrap}
+.toast{
+  position:fixed;right:18px;bottom:90px;z-index:100;
+  background:#111827;color:#fff;padding:12px 15px;border-radius:12px;
+  font-size:12px;box-shadow:0 18px 45px rgba(0,0,0,.2);
+  transform:translateY(15px);opacity:0;pointer-events:none;transition:.25s
+}
+.toast.show{transform:translateY(0);opacity:1}
+.photo-box{
+  min-height:165px;border:1.5px dashed #b8c4d2;border-radius:16px;
+  display:grid;place-items:center;text-align:center;background:#f8fafc;overflow:hidden
+}
+.photo-preview{width:100%;height:100%;min-height:165px;object-fit:cover;display:none}
+.photo-placeholder{padding:20px;color:#64748b;font-size:11px}
+.photo-placeholder strong{display:block;color:#334155;font-size:13px;margin-bottom:5px}
+.alert{
+  padding:11px 13px;border-radius:12px;font-size:11px;line-height:1.6;
+  background:#f0fdfa;border:1px solid #bdece5;color:#0f766e
+}
+.auto{font-weight:800;color:#0f766e}
+.hidden{display:none!important}
+
+@media(max-width:900px){
+  .grid-6{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .signature-grid{grid-template-columns:1fr}
+  .hero-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:640px){
+  .container{padding:12px}
+  .topbar-inner{padding:10px 12px}
+  .brand h1{font-size:14px}
+  .toolbar .btn{padding:8px 10px;font-size:11px}
+  .hero{padding:20px;border-radius:18px}
+  .hero h2{font-size:20px}
+  .section-body{padding:13px}
+  .grid-2,.grid-3,.grid-4,.grid-6{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .progress-step{min-width:135px}
+  .footer-actions-inner{padding:0 12px;align-items:stretch;flex-direction:column}
+  .action-group{width:100%}
+  .action-group .btn{flex:1}
+}
+
+
+/* ===== PREMIUM SCHOOL HEADER ===== */
+.school-header{
+  background:#fff;border:1px solid rgba(148,163,184,.34);border-radius:22px;
+  box-shadow:var(--shadow);padding:18px 20px;margin-bottom:18px;
+}
+.school-head-grid{
+  display:grid;grid-template-columns:92px 1fr 92px;align-items:center;gap:16px;
+}
+.logo-slot{
+  width:92px;height:92px;border:1.5px dashed #b7c5d3;border-radius:18px;
+  display:grid;place-items:center;background:#f8fafc;overflow:hidden;position:relative;
+}
+.logo-slot img{width:100%;height:100%;object-fit:contain;padding:4px;display:none;filter:none;opacity:1}
+.logo-placeholder{font-size:10px;color:#64748b;text-align:center;padding:8px}
+.logo-placeholder b{display:block;font-size:19px;color:#0f766e;margin-bottom:3px}
+.school-center{text-align:center}
+.school-center .gov{font-size:12px;font-weight:700;color:#475569}
+.school-center h2{margin:3px 0 2px;font-size:23px;color:#0f766e;font-weight:800}
+.school-center .sub{font-size:12px;font-weight:700}
+.school-meta{font-size:10px;color:#64748b;line-height:1.7;margin-top:3px}
+.school-controls{
+  margin-top:12px;padding-top:12px;border-top:1px dashed #d7dee8;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
+}
+.school-controls .field input{min-height:38px}
+
+.general-layout{display:grid;grid-template-columns:minmax(0,1fr) 155px;gap:14px;align-items:start}
+.general-photo{
+  position:sticky;top:90px;border:1px solid #d8e0e8;border-radius:16px;padding:8px;
+  background:#f8fafc;text-align:center
+}
+.general-photo .photo-box{min-height:190px;border:1.5px dashed #aebdcb}
+.general-photo .photo-preview{min-height:190px;object-fit:cover}
+.photo-mini-note{font-size:9px;color:#64748b;margin-top:5px}
+
+.age-panel{
+  margin-top:12px;border:1px solid #cfe7e3;background:#f7fffd;border-radius:15px;padding:12px
+}
+.age-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.age-panel-title{font-size:12px;font-weight:800;color:#0f766e}
+.age-presets{display:flex;gap:6px;flex-wrap:wrap}
+.age-preset{
+  border:1px solid #b9ddd8;background:#fff;color:#0f766e;border-radius:9px;
+  padding:5px 9px;font-size:10px;font-weight:700
+}
+.age-preset.active{background:#0f766e;color:#fff;border-color:#0f766e}
+.age-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1.4fr;gap:8px}
+.age-result{
+  min-height:42px;border-radius:10px;background:#fff;border:1px solid #d8e7e4;
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#0f766e;
+  font-size:13px;padding:7px
+}
+
+.signature-upload{
+  margin-top:7px;padding:7px;border:1px dashed #b7c5d3;border-radius:10px;background:#f8fafc
+}
+.signature-upload input{width:100%;font-size:9px}
+.sig-preview{
+  display:none;max-width:190px;height:52px;object-fit:contain;margin:6px auto 0;
+  background:#fff;border:1px solid #e2e8f0;border-radius:7px
+}
+.developer-card{
+  margin:18px 0 90px;background:#111827;color:#dbeafe;border-radius:18px;
+  padding:18px 20px;box-shadow:var(--shadow)
+}
+.developer-title{font-size:10px;letter-spacing:.08em;color:#94a3b8;text-transform:uppercase;margin-bottom:5px}
+.developer-name{font-size:18px;font-weight:800;color:#fff}
+.developer-role{font-size:11px;color:#cbd5e1;margin-bottom:12px}
+.socials{display:flex;flex-wrap:wrap;gap:7px}
+.socials a{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  color:#fff;text-decoration:none;background:#1f2937;border:1px solid #374151;
+  transition:.2s
+}
+.socials a:hover{transform:translateY(-2px);background:#0f766e}
+.dev-contact{font-size:10px;color:#cbd5e1;line-height:1.7;margin-top:8px}
+
+@media(max-width:760px){
+  .school-head-grid{grid-template-columns:68px 1fr 68px;gap:8px}
+  .logo-slot{width:68px;height:68px}
+  .school-center h2{font-size:17px}
+  .school-controls{grid-template-columns:1fr}
+  .general-layout{grid-template-columns:1fr}
+  .general-photo{position:relative;top:auto;order:-1;max-width:160px;margin-left:auto}
+  .age-grid{grid-template-columns:1fr 1fr}
+}
+
+
+/* ===== V3 REFINEMENTS ===== */
+.mode-switch{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px
+}
+.mode-option{
+  display:flex;align-items:center;gap:11px;padding:12px 14px;border:1px solid #d8e1e8;
+  border-radius:14px;background:#fff;cursor:pointer;transition:.2s
+}
+.mode-option:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,23,42,.06)}
+.mode-option.active{border-color:#52b9ad;background:#f0fdfa;box-shadow:0 7px 20px rgba(15,118,110,.08)}
+.mode-option input{accent-color:#0f766e}
+.mode-icon{
+  width:38px;height:38px;border-radius:11px;background:#ecfdf5;color:#0f766e;
+  display:grid;place-items:center;font-size:18px;flex:0 0 38px
+}
+.mode-option b{display:block;font-size:12px;color:#172033}
+.mode-option small{display:block;color:#64748b;font-size:9px;margin-top:2px}
+.application-box{
+  padding:12px;border:1px solid #bfe9e2;background:linear-gradient(135deg,#f0fdfa,#fff);
+  border-radius:14px;margin-bottom:12px
+}
+.office-only.disabled-mode{opacity:.6}
+.general-layout{position:relative;display:block}
+.general-info{padding-right:174px}
+.general-photo{
+  position:absolute;right:0;top:0;width:158px;z-index:2;
+  border:1px solid #d8e0e8;border-radius:16px;padding:8px;background:#f8fafc;text-align:center
+}
+.general-photo .photo-box{min-height:195px}
+.general-photo .photo-preview{min-height:195px}
+.general-photo input[type=file]{max-width:100%;font-size:9px}
+#studentNameEn{text-transform:uppercase}
+.age-reference-hint{display:none}
+.developer-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#0b1220 0%,#111827 50%,#172554 100%);
+}
+.developer-card:before,.developer-card:after{
+  content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none
+}
+.developer-card:before{width:180px;height:180px;right:-55px;top:-80px}
+.developer-card:after{width:130px;height:130px;left:-55px;bottom:-70px}
+.developer-name,.developer-role,.developer-title,.dev-contact,.socials,.developer-contact-grid{position:relative;z-index:1}
+.developer-contact-grid{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px}
+.developer-contact-grid a{
+  display:inline-flex;align-items:center;gap:7px;color:#fff;text-decoration:none;
+  border:1px solid rgba(255,255,255,.14);padding:7px 10px;border-radius:11px;
+  background:rgba(255,255,255,.06);font-size:10px;transition:.25s
+}
+.developer-contact-grid a:hover{transform:translateY(-2px);background:rgba(255,255,255,.11)}
+.dev-phone i{color:#60a5fa}
+.dev-whatsapp i{color:#25d366}
+.socials a{position:relative;overflow:hidden;background:rgba(255,255,255,.06)}
+.socials a i{font-size:16px}
+.socials a.facebook i{color:#1877f2}.socials a.youtube i{color:#ff0000}
+.socials a.tiktok i{color:#fff}.socials a.instagram i{color:#e4405f}
+.socials a.telegram i{color:#229ed9}
+.socials a:hover{animation:socialFloat .65s ease-in-out}
+@keyframes socialFloat{
+  0%,100%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-4px) scale(1.06)}
+}
+.socials a:after{
+  content:"";position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.28),transparent 60%);
+  transform:translateX(-80%) rotate(12deg);animation:shine 3.8s infinite
+}
+@keyframes shine{0%,55%{transform:translateX(-90%) rotate(12deg)}75%,100%{transform:translateX(90%) rotate(12deg)}}
+@media(max-width:760px){
+  .mode-switch{grid-template-columns:1fr}
+  .general-info{padding-right:0}
+  .general-photo{position:relative;top:auto;right:auto;width:150px;margin:0 0 10px auto}
+}
+
+/* PRINT */
+@page{size:A4 portrait;margin:8mm}
+@media print{
+  body{background:#fff;color:#111}
+  .topbar,.progress-wrap,.hero,.footer-actions,.developer-card,.school-controls{display:none!important}
+  .container{max-width:none;padding:0}
+  .school-header{
+    display:block!important;border:1px solid #222;border-radius:0;box-shadow:none;
+    padding:7px 9px;margin:0 0 7px;break-inside:avoid
+  }
+  .school-head-grid{grid-template-columns:64px 1fr 64px;gap:8px}
+  .logo-slot{width:64px;height:64px;border:0;background:#fff;border-radius:0}
+  .logo-slot img{padding:0;display:block!important}
+  .logo-placeholder{display:none!important}
+  .school-center .gov{font-size:8px;color:#111}
+  .school-center h2{font-size:16px;margin:1px 0}
+  .school-center .sub{font-size:8.5px}
+  .school-meta{font-size:7px;color:#222;line-height:1.45}
+  .form-card{box-shadow:none;border:1px solid #333;border-radius:0;margin-bottom:6px;break-inside:avoid}
+  .section-head{padding:6px 9px;background:#f6ecd8!important;border-bottom:1px solid #333}
+  .section-icon{display:none}
+  .section-head h3{font-size:11px}
+  .section-head span{font-size:8px}
+  .section-body{padding:7px}
+  .grid{gap:6px}
+  .field label{font-size:8.5px;margin-bottom:2px}
+  .field input,.field select,.field textarea{
+    min-height:23px;padding:3px 5px;border:1px solid #666;border-radius:0;
+    font-size:9px;background:#fff!important;box-shadow:none!important
+  }
+  select,.field select,.table select{
+    appearance:none!important;-webkit-appearance:none!important;-moz-appearance:none!important;
+    background-image:none!important;padding-right:4px!important;
+  }
+  .general-layout{position:relative;display:block}
+  .general-info{padding-right:37mm}
+  .general-photo{
+    position:absolute;right:0;top:0;width:29mm;border:0;padding:0;background:#fff
+  }
+  .general-photo .photo-box{min-height:37mm;height:37mm;border:1px solid #222;border-radius:0}
+  .general-photo .photo-preview{min-height:37mm;height:37mm;object-fit:cover}
+  .photo-mini-note{display:none}
+  .general-info .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #studentNameEn{text-transform:uppercase}
+  .application-box{padding:5px;margin-bottom:5px}
+  .mode-switch{display:none}
+  .age-panel{margin-top:5px;padding:5px;border-radius:0;border:1px solid #777;background:#fff}
+  .age-panel-head{margin-bottom:3px}
+  .age-panel-title{font-size:8px;color:#111}
+  .age-presets{display:none}
+  .age-grid{grid-template-columns:1fr 1fr 1fr 1.4fr;gap:3px}
+  .age-result{min-height:22px;font-size:8px;border-radius:0;padding:2px}
+
+  .general-info .field:first-child input,
+  .general-info .field:nth-child(2) input{
+    font-size:11px!important;font-weight:800!important;
+  }
+  .age-panel{margin-top:5px;padding:5px;border-radius:0;border:1px solid #777;background:#fff}
+  .age-panel-title{font-size:8px;color:#111}
+  .age-grid{grid-template-columns:1.35fr .8fr .8fr .8fr;gap:3px}
+  .age-result{min-height:22px;font-size:8px;border-radius:0;padding:2px}
+  .age-reference-hint{display:none!important}
+  .application-box .grid{grid-template-columns:1fr 1fr}
+  .field textarea{min-height:45px}
+  .table{min-width:0}
+  .table th,.table td{padding:4px 5px;font-size:8.5px}
+  .table td input,.table td select{min-height:20px;font-size:8.5px}
+  .alert{font-size:8.5px;padding:6px 8px}
+  .signature{font-size:8px;padding:8px}
+  input::placeholder,textarea::placeholder{color:transparent}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="brand-mark">ভ</div>
+      <div>
+        <h1>শিক্ষার্থী ভর্তি ও তথ্য ফরম</h1>
+        <p>ডিজিটাল ইনপুট • অটো-সেভ • প্রিন্ট রেডি</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button class="btn" type="button" onclick="scrollToSection('general')">ফরম পূরণ</button>
+      <button class="btn" type="button" onclick="saveForm()">সেভ</button>
+      <button class="btn primary" type="button" onclick="window.print()">🖨 প্রিন্ট</button>
+    </div>
+  </div>
+</div>
+
+<main class="container">
+
+  <section class="school-header" id="schoolHeader">
+    <div class="school-head-grid">
+      <div class="logo-slot">
+        <img id="logoLeftPreview" alt="বাম লোগো">
+        <div class="logo-placeholder" id="logoLeftPlaceholder"><b>◉</b>বাম লোগো</div>
+      </div>
+      <div class="school-center">
+        <div class="gov" id="schoolGov">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</div>
+        <h2 id="schoolNameDisplay">সেনেরহাট সরকারি প্রাথমিক বিদ্যালয়</h2>
+        <div class="sub" id="schoolLocationDisplay">লোহাগাড়া, চট্টগ্রাম</div>
+        <div class="school-meta">
+          প্রতিষ্ঠিত: <span id="schoolEstDisplay">১৯৩২</span> খ্রিস্টাব্দ &nbsp;•&nbsp;
+          IPEMIS: <span id="schoolIpemisDisplay">91411080102</span><br>
+          ঠিকানা: <span id="schoolAddressDisplay">গ্রাম বড়হাতিয়া, ডাকঘর সেনেরহাট, উপজেলা লোহাগাড়া, জেলা চট্টগ্রাম</span>
+        </div>
+      </div>
+      <div class="logo-slot">
+        <img id="logoRightPreview" alt="ডান লোগো">
+        <div class="logo-placeholder" id="logoRightPlaceholder"><b>◉</b>ডান লোগো</div>
+      </div>
+    </div>
+
+    <div class="school-controls">
+      <div class="field"><label>বিদ্যালয়ের নাম</label><input id="schoolNameInput" value="সেনেরহাট সরকারি প্রাথমিক বিদ্যালয়"></div>
+      <div class="field"><label>ঠিকানা / অবস্থান</label><input id="schoolLocationInput" value="লোহাগাড়া, চট্টগ্রাম"></div>
+      <div class="field"><label>প্রতিষ্ঠার সাল</label><input id="schoolEstInput" value="১৯৩২"></div>
+      <div class="field"><label>IPEMIS কোড</label><input id="schoolIpemisInput" value="91411080102"></div>
+      <div class="field" style="grid-column:span 2"><label>পূর্ণ ঠিকানা</label><input id="schoolAddressInput" value="গ্রাম বড়হাতিয়া, ডাকঘর সেনেরহাট, উপজেলা লোহাগাড়া, জেলা চট্টগ্রাম"></div>
+      <div class="field"><label>বাম লোগো</label><input id="logoLeftInput" type="file" accept="image/*"></div>
+      <div class="field"><label>ডান লোগো</label><input id="logoRightInput" type="file" accept="image/*"></div>
+    </div>
+  </section>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h2>শিক্ষার্থী ভর্তি / তথ্য সংরক্ষণ ফরম</h2>
+        <p>ছবির নমুনা অনুসারে সম্পূর্ণ ডিজিটাল ফরম — ড্রপডাউন, মডার্ণ ডেট পিকার, অটো বয়স ও প্রিন্ট লেআউটসহ।</p>
+      </div>
+      <div class="hero-badge">A4 • Responsive • Print Ready</div>
+    </div>
+  </section>
+
+  <div class="progress-wrap">
+    <div class="progress-card">
+      <div class="progress-step active" data-target="office"><div class="num">০</div><div>ভর্তি তথ্য</div></div>
+      <div class="progress-step" data-target="general"><div class="num">১</div><div>সাধারণ তথ্য</div></div>
+      <div class="progress-step" data-target="family"><div class="num">২</div><div>পারিবারিক তথ্য</div></div>
+      <div class="progress-step" data-target="education"><div class="num">৩</div><div>শিক্ষাগত তথ্য</div></div>
+      <div class="progress-step" data-target="health"><div class="num">৪</div><div>স্বাস্থ্য তথ্য</div></div>
+      <div class="progress-step" data-target="emergency"><div class="num">৫</div><div>জরুরি যোগাযোগ</div></div>
+      <div class="progress-step" data-target="declaration"><div class="num">৬</div><div>ঘোষণা</div></div>
+    </div>
+  </div>
+
+  <form id="studentForm" novalidate>
+
+    <!-- ADMISSION / APPLICATION MODE -->
+    <section class="form-card" id="office">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">০</div>
+          <div><h3>ভর্তি / আবেদন তথ্য</h3><span>Admission & Application Information</span></div>
+        </div>
+        <span>মোড নির্বাচন করুন</span>
+      </div>
+      <div class="section-body">
+        <div class="mode-switch">
+          <label class="mode-option active" id="modeOfficialLabel">
+            <input type="radio" name="formMode" value="official" checked>
+            <span class="mode-icon">🏫</span>
+            <span><b>অফিসিয়াল ভর্তি ফরম</b><small>অফিস কর্তৃক পূরণীয় তথ্য সক্রিয়</small></span>
+          </label>
+          <label class="mode-option" id="modeApplicantLabel">
+            <input type="radio" name="formMode" value="applicant">
+            <span class="mode-icon">📝</span>
+            <span><b>অভিভাবক / শিক্ষার্থী আবেদন</b><small>অফিসিয়াল ফিল্ড হাইড ও ডিজেবল থাকবে</small></span>
+          </label>
+        </div>
+
+        <div class="applicant-only application-box" id="applicantBox">
+          <div class="grid grid-2">
+            <div class="field">
+              <label>যে শ্রেণিতে ভর্তি হতে ইচ্ছুক <span class="req">*</span></label>
+              <select name="applicationClass" required>
+                <option value="">নির্বাচন করুন</option>
+                <option>প্রাক-প্রাথমিক ৪+</option><option>প্রাক-প্রাথমিক ৫+</option>
+                <option>প্রথম শ্রেণি</option><option>দ্বিতীয় শ্রেণি</option><option>তৃতীয় শ্রেণি</option>
+                <option>চতুর্থ শ্রেণি</option><option>পঞ্চম শ্রেণি</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>আবেদনের তারিখ <span class="req">*</span></label>
+              <input name="applicationDate" class="date-input" required placeholder="দিন-মাস-বছর">
+            </div>
+          </div>
+        </div>
+
+        <div class="office-only" id="officialBox">
+          <div class="grid grid-4">
+            <div class="field">
+              <label>ভর্তি নম্বর <span class="req">*</span></label>
+              <input name="admissionNo" required placeholder="যেমন: ০০১">
+            </div>
+            <div class="field">
+              <label>ভর্তিকৃত শ্রেণি <span class="req">*</span></label>
+              <select name="admittedClass" class="class-select" required>
+                <option value="">নির্বাচন করুন</option>
+                <option>প্রাক-প্রাথমিক ৪+</option><option>প্রাক-প্রাথমিক ৫+</option>
+                <option>প্রথম শ্রেণি</option><option>দ্বিতীয় শ্রেণি</option><option>তৃতীয় শ্রেণি</option>
+                <option>চতুর্থ শ্রেণি</option><option>পঞ্চম শ্রেণি</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>ভর্তি তারিখ <span class="req">*</span></label>
+              <input name="admissionDate" class="date-input" required placeholder="দিন-মাস-বছর">
+            </div>
+            <div class="field">
+              <label>শিক্ষাবর্ষ <span class="req">*</span></label>
+              <select name="academicYear" required>
+                <option value="">নির্বাচন করুন</option>
+                <option>২০২৬</option><option>২০২৭</option><option>২০২৮</option><option>২০২৯</option><option>২০৩০</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>শ্রেণি রোল</label>
+              <input name="classRoll" inputmode="numeric" placeholder="রোল নম্বর">
+            </div>
+            <div class="field">
+              <label>শাখা</label>
+              <select name="section">
+                <option value="">নির্বাচন করুন</option><option>ক</option><option>খ</option><option>গ</option><option>ঘ</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>শিফট</label>
+              <select name="shift"><option>প্রভাতী</option><option>দিবাকালীন</option></select>
+            </div>
+            <div class="field">
+              <label>স্ট্যাটাস</label>
+              <select name="status"><option>সক্রিয়</option><option>অপেক্ষমাণ</option><option>স্থানান্তরিত</option></select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERAL -->
+    <section class="form-card" id="general">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">১</div>
+          <div><h3>সাধারণ তথ্য</h3><span>General Information</span></div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="general-layout">
+          <div class="general-info">
+            <div class="grid grid-3">
+              <div class="field">
+                <label>শিক্ষার্থীর নাম (বাংলা) <span class="req">*</span></label>
+                <input name="studentNameBn" required placeholder="পূর্ণ নাম">
+              </div>
+              <div class="field">
+                <label>শিক্ষার্থীর নাম (ইংরেজি) <span class="req">*</span></label>
+                <input name="studentNameEn" id="studentNameEn" required placeholder="FULL NAME IN ENGLISH" autocomplete="off" spellcheck="false">
+              </div>
+              <div class="field">
+                <label>জেন্ডার <span class="req">*</span></label>
+                <select name="gender" required>
+                  <option value="">নির্বাচন করুন</option><option>ছেলে</option><option>মেয়ে</option><option>অন্যান্য</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>ধর্ম <span class="req">*</span></label>
+                <select name="religion" required>
+                  <option value="">নির্বাচন করুন</option><option>ইসলাম</option><option>হিন্দু</option><option>বৌদ্ধ</option><option>খ্রিস্টান</option><option>অন্যান্য</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>জাতীয়তা</label>
+                <select name="nationality"><option>বাংলাদেশী</option><option>অন্যান্য</option></select>
+              </div>
+              <div class="field">
+                <label>জন্ম নিবন্ধন নম্বর</label>
+                <input name="brn" inputmode="numeric" maxlength="17" placeholder="সর্বোচ্চ ১৭ সংখ্যা">
+              </div>
+              <div class="field">
+                <label>জন্ম তারিখ <span class="req">*</span></label>
+                <input name="birthDate" id="birthDate" class="date-input" required placeholder="দিন-মাস-বছর">
+              </div>
+              <div class="field">
+                <label>জন্মস্থান</label>
+                <input name="birthPlace" placeholder="স্থান">
+              </div>
+              <div class="field">
+                <label>বিশেষ নোট</label>
+                <input name="generalNote" placeholder="প্রয়োজনীয় অতিরিক্ত তথ্য">
+              </div>
+            </div>
+
+            <div class="age-panel">
+              <div class="age-panel-head">
+                <div class="age-panel-title">🎂 বয়স — বছর, মাস ও দিন</div>
+                <div class="age-presets">
+                  <button class="age-preset active" type="button" data-age-mode="today">আজ</button>
+                  <button class="age-preset" type="button" data-age-mode="yearStart">১ জানুয়ারি</button>
+                  <button class="age-preset" type="button" data-age-mode="custom">নির্দিষ্ট তারিখ</button>
+                </div>
+              </div>
+              <div class="age-grid">
+                <div class="field">
+                  <label>বয়স নির্ধারণের তারিখ</label>
+                  <input id="ageAsOf" name="ageAsOf" class="date-input" placeholder="দিন-মাস-বছর">
+                </div>
+                <div class="field">
+                  <label>বছর</label>
+                  <input id="ageYears" class="readonly auto" readonly>
+                </div>
+                <div class="field">
+                  <label>মাস</label>
+                  <input id="ageMonths" class="readonly auto" readonly>
+                </div>
+                <div class="field">
+                  <label>দিন</label>
+                  <input id="ageDays" class="readonly auto" readonly>
+                </div>
+              </div>
+              <div class="age-reference-hint">
+            </div>
+          </div>
+
+          <div class="general-photo">
+            <div class="photo-box">
+              <img id="photoPreview" class="photo-preview" alt="শিক্ষার্থীর ছবি">
+              <div id="photoPlaceholder" class="photo-placeholder">
+                <strong>📷 ছবি</strong>
+                ডান পাশের কর্নার
+                <div style="margin-top:8px"><input type="file" id="photoInput" accept="image/*"></div>
+              </div>
+            </div>
+            <div class="photo-mini-note">JPG/PNG • সর্বোচ্চ ২MB</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAMILY -->
+    <section class="form-card" id="family">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">২</div>
+          <div><h3>পারিবারিক তথ্য</h3><span>Family Information</span></div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="mini-title">পিতা-মাতার তথ্য</div>
+        <div class="grid grid-4">
+          <div class="field"><label>পিতার নাম (বাংলা)</label><input name="fatherBn" placeholder="পিতার নাম"></div>
+          <div class="field"><label>পিতার নাম (ইংরেজি)</label><input name="fatherEn" placeholder="Father Name"></div>
+          <div class="field"><label>পিতার NID নং</label><input name="fatherNid" inputmode="numeric" placeholder="NID নম্বর"></div>
+          <div class="field"><label>পিতার জন্ম তারিখ</label><input name="fatherDob" class="date-input"></div>
+          <div class="field"><label>পিতার মোবাইল নং</label><input name="fatherMobile" inputmode="tel" placeholder="01XXXXXXXXX"></div>
+          <div class="field"><label>পিতার পেশা</label>
+            <select name="fatherProfession">
+              <option value="">নির্বাচন করুন</option><option>সরকারি চাকরি</option><option>বেসরকারি চাকরি</option>
+              <option>ব্যবসা</option><option>কৃষি</option><option>প্রবাসী</option><option>শিক্ষক</option><option>অন্যান্য</option>
+            </select>
+          </div>
+          <div class="field"><label>পিতা জীবিত?</label><select name="fatherAlive"><option>হ্যাঁ</option><option>না</option></select></div>
+          <div class="field"><label>পিতার শিক্ষাগত যোগ্যতা</label><select name="fatherEducation"><option value="">নির্বাচন করুন</option><option>প্রাথমিক</option><option>মাধ্যমিক</option><option>উচ্চ মাধ্যমিক</option><option>স্নাতক</option><option>স্নাতকোত্তর</option><option>অন্যান্য</option></select></div>
+
+          <div class="field"><label>মাতার নাম (বাংলা)</label><input name="motherBn" placeholder="মাতার নাম"></div>
+          <div class="field"><label>মাতার নাম (ইংরেজি)</label><input name="motherEn" placeholder="Mother Name"></div>
+          <div class="field"><label>মাতার NID নং</label><input name="motherNid" inputmode="numeric" placeholder="NID নম্বর"></div>
+          <div class="field"><label>মাতার জন্ম তারিখ</label><input name="motherDob" class="date-input"></div>
+          <div class="field"><label>মাতার মোবাইল নং</label><input name="motherMobile" inputmode="tel" placeholder="01XXXXXXXXX"></div>
+          <div class="field"><label>মাতার পেশা</label>
+            <select name="motherProfession">
+              <option value="">নির্বাচন করুন</option><option>গৃহিণী</option><option>সরকারি চাকরি</option>
+              <option>বেসরকারি চাকরি</option><option>ব্যবসা</option><option>শিক্ষক</option><option>অন্যান্য</option>
+            </select>
+          </div>
+          <div class="field"><label>মাতা জীবিত?</label><select name="motherAlive"><option>হ্যাঁ</option><option>না</option></select></div>
+          <div class="field"><label>মাতার শিক্ষাগত যোগ্যতা</label><select name="motherEducation"><option value="">নির্বাচন করুন</option><option>প্রাথমিক</option><option>মাধ্যমিক</option><option>উচ্চ মাধ্যমিক</option><option>স্নাতক</option><option>স্নাতকোত্তর</option><option>অন্যান্য</option></select></div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="mini-title">অভিভাবক ও ঠিকানা</div>
+        <div class="grid grid-4">
+          <div class="field"><label>অভিভাবকের ধরন</label><select name="guardianType"><option>পিতা</option><option>মাতা</option><option>দাদা/দাদী</option><option>নানা/নানী</option><option>ভাই/বোন</option><option>অন্যান্য</option></select></div>
+          <div class="field"><label>অভিভাবকের নাম</label><input name="guardianName"></div>
+          <div class="field"><label>অভিভাবকের NID</label><input name="guardianNid" inputmode="numeric"></div>
+          <div class="field"><label>অভিভাবকের মোবাইল</label><input name="guardianMobile" inputmode="tel" placeholder="01XXXXXXXXX"></div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:12px">
+          <div>
+            <div class="mini-title">স্থায়ী ঠিকানা</div>
+            <div class="grid grid-2">
+              <div class="field"><label>গ্রাম / পাড়া</label><input name="permVillage"></div>
+              <div class="field"><label>বাড়ি / হোল্ডিং</label><input name="permHouse"></div>
+              <div class="field"><label>ডাকঘর</label><input name="permPost"></div>
+              <div class="field"><label>ইউনিয়ন / ওয়ার্ড</label><input name="permUnion"></div>
+              <div class="field"><label>উপজেলা</label><input name="permUpazila"></div>
+              <div class="field"><label>জেলা</label><input name="permDistrict"></div>
+            </div>
+          </div>
+          <div>
+            <div class="mini-title">বর্তমান ঠিকানা</div>
+            <div class="grid grid-2">
+              <div class="field"><label>গ্রাম / পাড়া</label><input name="presentVillage"></div>
+              <div class="field"><label>বাড়ি / হোল্ডিং</label><input name="presentHouse"></div>
+              <div class="field"><label>ডাকঘর</label><input name="presentPost"></div>
+              <div class="field"><label>ইউনিয়ন / ওয়ার্ড</label><input name="presentUnion"></div>
+              <div class="field"><label>উপজেলা</label><input name="presentUpazila"></div>
+              <div class="field"><label>জেলা</label><input name="presentDistrict"></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px">
+          <label style="font-size:11px;font-weight:700"><input type="checkbox" id="sameAddress"> বর্তমান ঠিকানা স্থায়ী ঠিকানার মতোই</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="form-card" id="education">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">৩</div>
+          <div><h3>শিক্ষাগত তথ্য</h3><span>Educational Background</span></div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid grid-3">
+          <div class="field"><label>পূর্ববর্তী বিদ্যালয়ের নাম</label><input name="previousSchool"></div>
+          <div class="field"><label>পূর্ববর্তী শ্রেণি</label>
+            <select name="previousClass"><option value="">নির্বাচন করুন</option><option>প্রাক-প্রাথমিক ৪+</option><option>প্রাক-প্রাথমিক ৫+</option><option>প্রথম</option><option>দ্বিতীয়</option><option>তৃতীয়</option><option>চতুর্থ</option><option>পঞ্চম</option></select>
+          </div>
+          <div class="field"><label>ফলাফল / গ্রেড</label><input name="previousResult" placeholder="যেমন: A / 4.00 / উত্তীর্ণ"></div>
+        </div>
+        <div class="grid grid-3" style="margin-top:12px">
+          <div class="field"><label>পূর্ববর্তী বিদ্যালয়ের EIIN / কোড</label><input name="previousCode"></div>
+          <div class="field"><label>স্থানান্তরের কারণ</label><select name="transferReason"><option value="">নির্বাচন করুন</option><option>বাসস্থান পরিবর্তন</option><option>অভিভাবকের চাকরি</option><option>বিদ্যালয় পরিবর্তন</option><option>অন্যান্য</option></select></div>
+          <div class="field"><label>ভর্তি সংক্রান্ত নোট</label><input name="educationNote"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HEALTH -->
+    <section class="form-card" id="health">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">৪</div>
+          <div><h3>স্বাস্থ্য সংক্রান্ত তথ্য</h3><span>Health Information</span></div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid grid-4">
+          <div class="field"><label>সামগ্রিক স্বাস্থ্য</label><select name="healthStatus"><option>সুস্থ</option><option>মোটামুটি</option><option>বিশেষ নজর প্রয়োজন</option></select></div>
+          <div class="field"><label>রক্তের গ্রুপ</label><select name="bloodGroup"><option value="">নির্বাচন করুন</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+          <div class="field"><label>উচ্চতা (সেমি)</label><input name="height" inputmode="decimal" placeholder="যেমন 120"></div>
+          <div class="field"><label>ওজন (কেজি)</label><input name="weight" inputmode="decimal" placeholder="যেমন 25"></div>
+          <div class="field"><label>দৃষ্টিশক্তি</label><select name="eyesight"><option>স্বাভাবিক</option><option>কম</option><option>বিশেষজ্ঞ পরামর্শ প্রয়োজন</option></select></div>
+          <div class="field"><label>চশমা ব্যবহার</label><select name="glasses"><option>না</option><option>হ্যাঁ</option></select></div>
+          <div class="field"><label>শ্রবণ সমস্যা</label><select name="hearing"><option>না</option><option>হ্যাঁ</option></select></div>
+          <div class="field"><label>প্রতিবন্ধকতা</label><select name="disability"><option>নেই</option><option>আছে</option></select></div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="mini-title">টিকাদান (Vaccination Record)</div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th style="width:36%">টিকার নাম</th><th style="width:20%">গ্রহণ</th><th>তারিখ</th><th style="width:26%">নোট</th></tr></thead>
+            <tbody>
+              <tr><td>BCG / যক্ষ্মা</td><td><select name="v1"><option>হ্যাঁ</option><option>না</option><option>জানা নেই</option></select></td><td><input class="date-input" name="v1date"></td><td><input name="v1note"></td></tr>
+              <tr><td>Measles / Rubella / হাম ও রুবেলা</td><td><select name="v2"><option>হ্যাঁ</option><option>না</option><option>জানা নেই</option></select></td><td><input class="date-input" name="v2date"></td><td><input name="v2note"></td></tr>
+              <tr><td>Pentavalent</td><td><select name="v3"><option>হ্যাঁ</option><option>না</option><option>জানা নেই</option></select></td><td><input class="date-input" name="v3date"></td><td><input name="v3note"></td></tr>
+              <tr><td>PCV / নিউমোকক্কাল</td><td><select name="v4"><option>হ্যাঁ</option><option>না</option><option>জানা নেই</option></select></td><td><input class="date-input" name="v4date"></td><td><input name="v4note"></td></tr>
+              <tr><td>Polio / পোলিও</td><td><select name="v5"><option>হ্যাঁ</option><option>না</option><option>জানা নেই</option></select></td><td><input class="date-input" name="v5date"></td><td><input name="v5note"></td></tr>
+              <tr><td>TT / এনটিটেনাস</td><td><select name="v6"><option>না</option><option>হ্যাঁ</option><option>জানা নেই</option></select></td><td><input class="date-input" name="v6date"></td><td><input name="v6note"></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="divider"></div>
+        <div class="mini-title">রোগ / বিশেষ স্বাস্থ্যগত তথ্য</div>
+        <div class="grid grid-4">
+          <div class="field"><label>অ্যাজমা</label><select name="asthma"><option>না</option><option>আছে</option></select></div>
+          <div class="field"><label>অ্যালার্জি</label><select name="allergy"><option>নেই</option><option>আছে</option></select></div>
+          <div class="field"><label>দুরারোগ্য রোগ</label><select name="chronic"><option>নেই</option><option>আছে</option></select></div>
+          <div class="field"><label>জরুরি স্বাস্থ্য নোট</label><input name="healthNote" placeholder="প্রয়োজনে লিখুন"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMERGENCY -->
+    <section class="form-card" id="emergency">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">৫</div>
+          <div><h3>জরুরি যোগাযোগ</h3><span>Emergency Contact</span></div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="grid grid-4">
+          <div class="field"><label>নাম <span class="req">*</span></label><input name="emergencyName" required></div>
+          <div class="field"><label>সম্পর্ক</label><select name="emergencyRelation"><option>পিতা</option><option>মাতা</option><option>অভিভাবক</option><option>ভাই/বোন</option><option>অন্যান্য</option></select></div>
+          <div class="field"><label>মোবাইল <span class="req">*</span></label><input name="emergencyMobile" required inputmode="tel" placeholder="01XXXXXXXXX"></div>
+          <div class="field"><label>বিকল্প মোবাইল</label><input name="emergencyAltMobile" inputmode="tel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DECLARATION -->
+    <section class="form-card" id="declaration">
+      <div class="section-head">
+        <div class="section-title">
+          <div class="section-icon">৬</div>
+          <div><h3>ঘোষণা</h3><span>Declaration</span></div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="alert">
+          আমি এই মর্মে ঘোষণা করছি যে, উপরে প্রদত্ত সকল তথ্য আমার জ্ঞান ও বিশ্বাস অনুযায়ী সঠিক ও সত্য।
+          কোনো তথ্য পরিবর্তিত হলে বিদ্যালয় কর্তৃপক্ষকে যথাসময়ে অবহিত করব।
+        </div>
+
+        <div class="grid grid-3" style="margin-top:15px">
+          <div class="field">
+            <label>অভিভাবকের নাম ও স্বাক্ষর</label>
+            <input name="guardianSignature" placeholder="নাম লিখুন">
+          </div>
+          <div class="field">
+            <label>শ্রেণি শিক্ষকের নাম</label>
+            <input name="classTeacherSignature" placeholder="নাম লিখুন">
+            <div class="signature-upload">
+              <input type="file" id="classTeacherSigInput" accept="image/*">
+              <img id="classTeacherSigPreview" class="sig-preview" alt="শ্রেণি শিক্ষকের স্বাক্ষর">
+            </div>
+          </div>
+          <div class="field">
+            <label>প্রধান শিক্ষকের নাম</label>
+            <input name="headTeacherSignature" placeholder="নাম লিখুন">
+            <div class="signature-upload">
+              <input type="file" id="headTeacherSigInput" accept="image/*">
+              <img id="headTeacherSigPreview" class="sig-preview" alt="প্রধান শিক্ষকের স্বাক্ষর">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:10px">
+          <div class="field"><label>অভিভাবকের তারিখ</label><input name="guardianDate" class="date-input"></div>
+          <div class="field"><label>শ্রেণি শিক্ষকের তারিখ</label><input name="teacherDate" class="date-input"></div>
+          <div class="field"><label>প্রধান শিক্ষকের তারিখ</label><input name="headDate" class="date-input"></div>
+        </div>
+      </div>
+    </section>
+
+  </form>
+
+  <section class="developer-card">
+    <div class="developer-title">Developed By</div>
+    <div class="developer-name">ARFATUL KAISAR</div>
+    <div class="developer-role">Assistant Teacher • Senerhat GPS • Lohagara, Chattogram</div>
+    <div class="dev-contact">📞 01893-671267 &nbsp; | &nbsp; WhatsApp: +8801893-671267</div>
+    <div class="developer-contact-grid">
+      <a class="dev-phone" href="tel:+8801893671267"><i class="fa-solid fa-phone"></i><span>01893-671267</span></a>
+      <a class="dev-whatsapp" href="https://wa.me/8801893671267" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+    </div>
+    <div class="socials" aria-label="Social media links">
+      <a class="facebook" href="https://www.facebook.com/share/1CCS4NsWei/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a class="youtube" href="https://youtube.com/@alherateachinghome6044?si=XP4yOxW3WH-h7029" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a class="tiktok" href="https://www.tiktok.com/@makaisar94?_r=1&_t=ZS-99QjuocWZnA" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a class="instagram" href="https://www.instagram.com/makaisar94?igsh=M2ZmdjMzM2Exd3cx" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a class="telegram" href="https://t.me/makaisar" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-actions">
+  <div class="footer-actions-inner">
+    <div class="status" id="saveStatus">এই ফরমটি আপনার ডিভাইসে অটো-সেভ হবে।</div>
+    <div class="action-group">
+      <button class="btn warning" type="button" onclick="loadForm()">↻ পুনরুদ্ধার</button>
+      <button class="btn danger" type="button" onclick="resetForm()">× রিসেট</button>
+      <button class="btn primary" type="button" onclick="saveForm()">✓ তথ্য সংরক্ষণ</button>
+      <button class="btn" type="button" onclick="window.print()">🖨 প্রিন্ট / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const form = document.getElementById('studentForm');
+const STORAGE_KEY = 'student_admission_form_v1';
+
+function toast(message){
+  const el = document.getElementById('toast');
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=>el.classList.remove('show'), 2100);
+}
+
+function scrollToSection(id){
+  document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function initDatePickers(){
+  document.querySelectorAll('.date-input').forEach(input=>{
+    if(input._flatpickr) return;
+    flatpickr(input,{
+      locale: 'bn',
+      dateFormat:'d-m-Y',
+      allowInput:true,
+      disableMobile:false,
+      onChange:()=>{ calculateAge(); autoSave(); }
+    });
+  });
+}
+
+function parseBDDate(value){
+  if(!value) return null;
+  const p=value.split('-');
+  if(p.length!==3) return null;
+  const d=new Date(Number(p[2]), Number(p[1])-1, Number(p[0]));
+  if(d.getFullYear()!==Number(p[2]) || d.getMonth()!==Number(p[1])-1 || d.getDate()!==Number(p[0])) return null;
+  d.setHours(0,0,0,0);
+  return d;
+}
+function formatDateBD(d){
+  const dd=String(d.getDate()).padStart(2,'0');
+  const mm=String(d.getMonth()+1).padStart(2,'0');
+  return `${dd}-${mm}-${d.getFullYear()}`;
+}
+function calculateAge(){
+  const dob=parseBDDate(document.getElementById('birthDate')?.value);
+  const asOf=parseBDDate(document.getElementById('ageAsOf')?.value);
+  if(!dob || !asOf){
+    ['ageYears','ageMonths','ageDays'].forEach(id=>document.getElementById(id).value='');
+    return;
+  }
+  if(asOf < dob){
+    document.getElementById('ageYears').value='—';
+    document.getElementById('ageMonths').value='—';
+    document.getElementById('ageDays').value='জন্মের আগে নয়';
+    return;
+  }
+  let y=asOf.getFullYear()-dob.getFullYear();
+  let m=asOf.getMonth()-dob.getMonth();
+  let d=asOf.getDate()-dob.getDate();
+  if(d<0){
+    m--;
+    const daysInPrevMonth=new Date(asOf.getFullYear(),asOf.getMonth(),0).getDate();
+    d += daysInPrevMonth;
+  }
+  if(m<0){ y--; m+=12; }
+  document.getElementById('ageYears').value=y;
+  document.getElementById('ageMonths').value=m;
+  document.getElementById('ageDays').value=`${d} দিন`;
+}
+function setAgeReference(mode){
+  const input=document.getElementById('ageAsOf');
+  const today=new Date();
+  if(mode==='today'){
+    input._flatpickr?.setDate(today,true);
+  }else if(mode==='yearStart'){
+    input._flatpickr?.setDate(new Date(today.getFullYear(),0,1),true);
+  }
+  document.querySelectorAll('.age-preset').forEach(b=>b.classList.toggle('active',b.dataset.ageMode===mode));
+  calculateAge();
+}
+
+
+function setFormMode(mode){
+  const officialBox=document.getElementById('officialBox');
+  const applicantBox=document.getElementById('applicantBox');
+  const officialLabel=document.getElementById('modeOfficialLabel');
+  const applicantLabel=document.getElementById('modeApplicantLabel');
+  const official=mode==='official';
+  officialBox.classList.toggle('hidden',!official);
+  applicantBox.classList.toggle('hidden',official);
+  officialLabel.classList.toggle('active',official);
+  applicantLabel.classList.toggle('active',!official);
+  officialBox.querySelectorAll('input,select,textarea').forEach(el=>el.disabled=!official);
+  applicantBox.querySelectorAll('input,select,textarea').forEach(el=>el.disabled=official);
+  localStorage.setItem('formMode',mode);
+}
+document.querySelectorAll('input[name="formMode"]').forEach(r=>{
+  r.addEventListener('change',()=>setFormMode(r.value));
+});
+function initFormMode(){
+  const mode=localStorage.getItem('formMode') || 'official';
+  const radio=document.querySelector(`input[name="formMode"][value="${mode}"]`);
+  if(radio) radio.checked=true;
+  setFormMode(mode);
+}
+const studentNameEn=document.getElementById('studentNameEn');
+studentNameEn?.addEventListener('input',function(){
+  const start=this.selectionStart;
+  this.value=this.value.toUpperCase();
+  try{this.setSelectionRange(start,start)}catch(e){}
+});
+
+function saveForm(silent=false){
+  const data = {};
+  data.__formMode = document.querySelector('input[name="formMode"]:checked')?.value || 'official';
+  form.querySelectorAll('input,select,textarea').forEach(el=>{
+    if(el.type==='file') return;
+    data[el.name] = el.value;
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  document.getElementById('saveStatus').textContent = 'সর্বশেষ সংরক্ষণ: ' + new Date().toLocaleTimeString('bn-BD');
+  if(!silent) toast('তথ্য সফলভাবে সংরক্ষণ হয়েছে ✓');
+}
+
+function autoSave(){ saveForm(true); }
+
+function loadForm(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(!raw){ toast('কোনো সংরক্ষিত তথ্য পাওয়া যায়নি।'); return; }
+  const data = JSON.parse(raw);
+  Object.entries(data).forEach(([name,value])=>{
+    if(name==='__formMode') return;
+    const el = form.elements[name];
+    if(el) el.value = value;
+  });
+  if(data.__formMode) {
+    const radio=document.querySelector(`input[name="formMode"][value="${data.__formMode}"]`);
+    if(radio) radio.checked=true;
+    setFormMode(data.__formMode);
+  }
+  calculateAge();
+  toast('সংরক্ষিত তথ্য পুনরুদ্ধার হয়েছে ✓');
+}
+
+function resetForm(){
+  if(!confirm('সব তথ্য মুছে ফেলতে চান?')) return;
+  form.reset();
+  localStorage.removeItem(STORAGE_KEY);
+  ['photoInput','logoLeftInput','logoRightInput','classTeacherSigInput','headTeacherSigInput'].forEach(id=>localStorage.removeItem('img_'+id));
+  ['schoolNameInput','schoolLocationInput','schoolEstInput','schoolIpemisInput','schoolAddressInput'].forEach(id=>localStorage.removeItem(id));
+  ['ageYears','ageMonths','ageDays'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  document.getElementById('photoPreview').style.display='none';
+  document.getElementById('photoPlaceholder').style.display='block';
+  document.getElementById('saveStatus').textContent='ফরম রিসেট করা হয়েছে।';
+  toast('ফরম রিসেট হয়েছে');
+}
+
+function validateRequired(){
+  const required = [...form.querySelectorAll('[required]')];
+  let ok = true;
+  required.forEach(el=>{
+    if(!el.value.trim()){
+      ok=false;
+      el.style.borderColor='#dc2626';
+    }else{
+      el.style.borderColor='';
+    }
+  });
+  return ok;
+}
+
+document.getElementById('photoInput').addEventListener('change', (e)=>{
+  const file=e.target.files?.[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024){
+    toast('ছবির আকার ২MB-এর বেশি হতে পারবে না');
+    e.target.value='';
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    document.getElementById('photoPreview').src=reader.result;
+    document.getElementById('photoPreview').style.display='block';
+    document.getElementById('photoPlaceholder').style.display='none';
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById('sameAddress').addEventListener('change', function(){
+  if(!this.checked) return;
+  ['Village','House','Post','Union','Upazila','District'].forEach(part=>{
+    const from=form.elements['perm'+part];
+    const to=form.elements['present'+part];
+    if(from && to) to.value=from.value;
+  });
+  autoSave();
+});
+
+form.addEventListener('input', ()=>{
+  clearTimeout(window.__autosave);
+  window.__autosave=setTimeout(()=>autoSave(), 450);
+});
+
+form.addEventListener('change', ()=>{
+  autoSave();
+  calculateAge();
+});
+
+document.querySelectorAll('.progress-step').forEach(step=>{
+  step.addEventListener('click',()=>{
+    scrollToSection(step.dataset.target);
+  });
+});
+
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      document.querySelectorAll('.progress-step').forEach(s=>s.classList.toggle('active',s.dataset.target===entry.target.id));
+    }
+  });
+},{rootMargin:'-28% 0px -55% 0px',threshold:0});
+document.querySelectorAll('.form-card').forEach(sec=>observer.observe(sec));
+
+window.addEventListener('beforeprint', ()=>saveForm(true));
+
+
+function bindImageInput(inputId, previewId, placeholderId){
+  const input=document.getElementById(inputId);
+  if(!input) return;
+  input.addEventListener('change',e=>{
+    const file=e.target.files?.[0];
+    if(!file) return;
+    if(file.size>2*1024*1024){ toast('ছবির আকার ২MB-এর বেশি হতে পারবে না'); input.value=''; return; }
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const img=document.getElementById(previewId);
+      img.src=reader.result; img.style.display='block';
+      if(placeholderId) document.getElementById(placeholderId).style.display='none';
+      localStorage.setItem('img_'+inputId, reader.result);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function restoreImage(inputId, previewId, placeholderId){
+  const src=localStorage.getItem('img_'+inputId);
+  if(!src) return;
+  const img=document.getElementById(previewId);
+  if(img){img.src=src;img.style.display='block';}
+  if(placeholderId){const p=document.getElementById(placeholderId); if(p)p.style.display='none';}
+}
+function syncSchoolHeader(){
+  const pairs=[
+    ['schoolNameInput','schoolNameDisplay'],
+    ['schoolLocationInput','schoolLocationDisplay'],
+    ['schoolEstInput','schoolEstDisplay'],
+    ['schoolIpemisInput','schoolIpemisDisplay'],
+    ['schoolAddressInput','schoolAddressDisplay']
+  ];
+  pairs.forEach(([a,b])=>{
+    const src=document.getElementById(a), out=document.getElementById(b);
+    if(src&&out) out.textContent=src.value;
+  });
+}
+function bindSchoolHeader(){
+  ['schoolNameInput','schoolLocationInput','schoolEstInput','schoolIpemisInput','schoolAddressInput'].forEach(id=>{
+    document.getElementById(id)?.addEventListener('input',()=>{syncSchoolHeader();localStorage.setItem(id,document.getElementById(id).value);});
+  });
+  ['schoolNameInput','schoolLocationInput','schoolEstInput','schoolIpemisInput','schoolAddressInput'].forEach(id=>{
+    const v=localStorage.getItem(id); if(v!==null) document.getElementById(id).value=v;
+  });
+  syncSchoolHeader();
+}
+document.querySelectorAll('.age-preset').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const mode=btn.dataset.ageMode;
+    if(mode==='custom'){
+      document.querySelectorAll('.age-preset').forEach(b=>b.classList.toggle('active',b===btn));
+      document.getElementById('ageAsOf')?.focus();
+    }else setAgeReference(mode);
+  });
+});
+
+bindImageInput('photoInput','photoPreview','photoPlaceholder');
+bindImageInput('logoLeftInput','logoLeftPreview','logoLeftPlaceholder');
+bindImageInput('logoRightInput','logoRightPreview','logoRightPlaceholder');
+bindImageInput('classTeacherSigInput','classTeacherSigPreview',null);
+bindImageInput('headTeacherSigInput','headTeacherSigPreview',null);
+['photoInput','logoLeftInput','logoRightInput','classTeacherSigInput','headTeacherSigInput'].forEach(id=>restoreImage(id,id.replace('Input','Preview'),id==='photoInput'?'photoPlaceholder':id==='logoLeftInput'?'logoLeftPlaceholder':id==='logoRightInput'?'logoRightPlaceholder':null));
+bindSchoolHeader();
+initFormMode();
+
+initDatePickers();
+if(!document.getElementById('ageAsOf').value){
+  document.getElementById('ageAsOf')._flatpickr?.setDate(new Date(), true);
+}
+loadForm();
+if(!document.getElementById('ageAsOf').value){
+  document.getElementById('ageAsOf')._flatpickr?.setDate(new Date(), true);
+}
+calculateAge();
+</script>
+</body>
+</html>
